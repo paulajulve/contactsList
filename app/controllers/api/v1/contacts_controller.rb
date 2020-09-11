@@ -20,6 +20,18 @@ module Api
         end
       end
 
+      def update
+        @contact = Contact.find_by(id: params[:id])
+
+        return head :not_found unless @contact
+
+        if @contact.update(contact_params)
+          head :no_content
+        else
+          head 422
+        end
+      end
+
       private
 
       def contact_params

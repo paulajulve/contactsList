@@ -41,4 +41,25 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response 422
   end
 
+  test "should update existing contact" do
+    one_id = contacts(:one).id
+    patch "/api/v1/contacts/#{one_id}", params: { first_name: "Syen", email: "syen@fulcrum.com"}
+    assert_response :no_content
+  end
+
+  test "cannot update contact email if already assigned to other contact" do
+    one_id = contacts(:one).id
+    patch "/api/v1/contacts/#{one_id}", params: { email: "syen@fulcrum.com"}
+    assert_response :no_content
+
+    two_id = contacts(:two).id
+    patch "/api/v1/contacts/#{two_id}", params: { email: "syen@fulcrum.com"}
+    assert_response 422
+  end
+
+  test "should return not found if no contact exists for given id" do
+    patch "/api/v1/contacts/27", params: { email: "syen@fulcrum.com"}
+    assert_response :not_found
+  end
+
 end
