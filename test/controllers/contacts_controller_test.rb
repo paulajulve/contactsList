@@ -19,4 +19,26 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "should create contact" do
+    post api_v1_contacts_path,
+      params: { first_name: "Syen", last_name: "Orogene", email: "syen@fulcrum.com", phone: "654321987" }
+    assert_response :ok
+  end
+
+  test "cannot create contact if some params are missing" do
+    post api_v1_contacts_path,
+         params: { first_name: "Syen", email: "syen@fulcrum.com" }
+    assert_response 422
+  end
+
+  test "cannot create contact if email already exists for another contact" do
+    post api_v1_contacts_path,
+         params: { first_name: "Essun", last_name: "Strongback", email: "syen@fulcrum.com", phone: "654321987" }
+    assert_response :ok
+
+    post api_v1_contacts_path,
+         params: { first_name: "Syen", last_name: "Orogene", email: "syen@fulcrum.com", phone: "654321987" }
+    assert_response 422
+  end
+
 end
