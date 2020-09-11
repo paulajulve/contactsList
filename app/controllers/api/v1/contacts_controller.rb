@@ -32,6 +32,18 @@ module Api
         end
       end
 
+      def destroy
+        @contact = Contact.find_by(id: params[:id])
+
+        return head :not_found unless @contact
+
+        if @contact.destroy
+          head :no_content
+        else
+          head 422
+        end
+      end
+
       private
 
       def contact_params

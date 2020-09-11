@@ -62,4 +62,27 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "should delete existing contact" do
+    contact_id = contacts(:one).id
+    delete "/api/v1/contacts/#{contact_id}"
+    assert_response :no_content
+
+    get api_v1_contacts_path
+    assert_response :ok
+
+    body = JSON.parse(response.body)
+    assert_equal 1, body.length
+  end
+
+  test "should return not found if no contact exists with given id to be deleted" do
+    contact_id = contacts(:one).id
+    route = "/api/v1/contacts/#{contact_id}"
+
+    delete route
+    assert_response :no_content
+
+    delete route
+    assert_response :not_found
+  end
+
 end
