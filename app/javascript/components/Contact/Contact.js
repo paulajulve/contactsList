@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import EditForm from "./EditForm";
-import Details from "./Details";
+import ContactForm from "../Common/ContactForm";
 
 const Contact = (props) => {
     const [contact, setContact] = useState({})
@@ -15,9 +14,9 @@ const Contact = (props) => {
     }, [])
 
     const handleChange = (e) => {
-        // e.preventDefault()
-        //
-        // setContact(Object.assign({}, contact, {[e.target.name]: e.target.value}))
+        e.preventDefault()
+
+        setContact(Object.assign({}, contact, {[e.target.name]: e.target.value}))
     }
 
     const handleSubmit = (e) => {
@@ -31,32 +30,20 @@ const Contact = (props) => {
             "phone": contact.phone
         })
             .then(resp => {
-                // TODO make the form a different view and redirect to contact show view on submit
+                props.history.push('/')
             })
             .catch(resp => {})
     }
 
     return (
-        <div className="wrapper">
-            <div className="column">
-                <Details
-                    first_name={contact.first_name}
-                    last_name={contact.last_name}
-                    email={contact.email}
-                    phone={contact.phone}
-                    />
-            </div>
-            <div className="column">
-                <EditForm
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    first_name={contact.first_name}
-                    last_name={contact.last_name}
-                    email={contact.email}
-                    phone={contact.phone}
-                />
-            </div>
-        </div>
+        <ContactForm
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            first_name={contact.first_name}
+            last_name={contact.last_name}
+            email={contact.email}
+            phone={contact.phone}
+        />
     )
 }
 
