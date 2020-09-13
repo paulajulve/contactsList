@@ -1,7 +1,7 @@
-import React, {useState, useEffect, Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Contact from "./Contact";
-import {Link} from "react-router-dom";
+import {Button, Container, Grid, List, ListItem} from "@material-ui/core";
+import Contact from "./Contact"
 
 const Contacts = () => {
     const [contacts, setContacts] = useState([])
@@ -24,30 +24,35 @@ const Contacts = () => {
 
     const list = contacts.map( (contact, index) => {
         return (
-            <Contact
-                key={index}
-                id={contact.id}
-                first_name={contact.first_name}
-                last_name={contact.last_name}
-                handleDelete={deleteContact}
-            />
+            <ListItem key={index}>
+                <Contact
+                    id={contact.id}
+                    first_name={contact.first_name}
+                    last_name={contact.last_name}
+                    email={contact.email}
+                    phone={contact.phone}
+                    handleDelete={deleteContact}
+                />
+            </ListItem>
         )
     })
 
     return (
-        <div>
-            <div>
-                <h1>Contacts list :)</h1>
-            </div>
+        <Container>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <List>
+                        {list}
+                    </List>
+                </Grid>
 
-            <div>
-                {list}
-            </div>
-
-            <div>
-                <Link to={`/create`}>Create a new contact</Link>
-            </div>
-        </div>
+                <Grid item xs={12}>
+                    <Button variant="contained" color="primary" href={`/create`}>
+                        Add contact
+                    </Button>
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 

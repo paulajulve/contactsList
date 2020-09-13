@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Link } from "react-router-dom"
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
+import React  from 'react'
+import {Link} from "react-router-dom";
+import {Accordion, AccordionSummary, AccordionActions, AccordionDetails, Grid, Divider, IconButton, Typography}
+from '@material-ui/core'
+import {Delete, Edit, Email, ExpandMore, Phone} from '@material-ui/icons'
 import ConfirmDialogue from "./ConfirmDialogue"
 
 class Contact extends React.Component {
@@ -26,17 +27,33 @@ class Contact extends React.Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="contact-first-name">{this.props.first_name}</div>
-                <div className="contact-last-name">{this.props.last_name}</div>
-
-                <div className="contact-details-link">
-                    <Link to={`/contacts/${this.props.id}`}>View details</Link>
-                </div>
-
-                <div>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMore/>}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography>
+                        {`${this.props.first_name} ${this.props.last_name}`}
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={3}>
+                        <Grid item xs={2}><Email/></Grid>
+                        <Grid item xs={10}>{this.props.email}</Grid>
+                        <Grid item xs={2}><Phone/></Grid>
+                        <Grid item xs={10}>{this.props.phone}</Grid>
+                    </Grid>
+                </AccordionDetails>
+                <Divider/>
+                <AccordionActions>
+                    <IconButton aria-label="edit">
+                        <Link to={`/contacts/${this.props.id}`}>
+                            <Edit color="primary"/>
+                        </Link>
+                    </IconButton>
                     <IconButton aria-label="delete" onClick={() => this.setState({ confirmOpen: true })}>
-                        <DeleteIcon />
+                        <Delete color="secondary"/>
                     </IconButton>
 
                     <ConfirmDialogue
@@ -46,8 +63,9 @@ class Contact extends React.Component {
                     >
                         Are you sure you want to delete this contact?
                     </ConfirmDialogue>
-                </div>
-            </div>
+                </AccordionActions>
+            </Accordion>
+
         )
     }
 
