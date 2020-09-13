@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Component} from 'react'
 import axios from 'axios'
 import Contact from "./Contact";
+import {Link} from "react-router-dom";
 
 const Contacts = () => {
     const [contacts, setContacts] = useState([])
@@ -32,6 +33,10 @@ const Contacts = () => {
 
             <div className="grid">
                 {grid}
+            </div>
+
+            <div>
+                <Link to={`/create`}>Create a new contact</Link>
             </div>
         </div>
     )
