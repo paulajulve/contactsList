@@ -36,4 +36,26 @@ class ContactTest < ActiveSupport::TestCase
 
     assert_not contact.save
   end
+
+  test "cannot create contact with invalid email" do
+    contact = Contact.new({
+       first_name: "Syen",
+       last_name: "Orogene",
+       email: "orogenefulcrum.com",
+       phone: "654654654"
+    })
+
+    assert_not contact.save
+  end
+
+  test "cannot create contact with invalid pphone" do
+    contact = Contact.new({
+       first_name: "Syen",
+       last_name: "Orogene",
+       email: "orogene@fulcrum.com",
+       phone: "654"
+    })
+
+    assert_not contact.save
+  end
 end
