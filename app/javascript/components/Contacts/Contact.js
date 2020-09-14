@@ -48,7 +48,7 @@ class Contact extends React.Component {
                 <Divider/>
                 <AccordionActions>
                     <IconButton aria-label="edit">
-                        <Link to={`/contacts/${this.props.id}`}>
+                        <Link to={`/edit/${this.props.id}`}>
                             <Edit color="primary"/>
                         </Link>
                     </IconButton>

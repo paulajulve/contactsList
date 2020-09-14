@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import ContactForm from "../Common/ContactForm";
 
-const Contact = (props) => {
+const Edit = (props) => {
     const [contact, setContact] = useState({})
 
     useEffect(() => {
@@ -47,4 +47,4 @@ const Contact = (props) => {
     )
 }
 
-export default Contact
+export default Edit
