@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {Button, Container, Grid, List, ListItem} from "@material-ui/core";
 import Contact from "./Contact"
@@ -47,7 +48,7 @@ const Contacts = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Button variant="contained" color="primary" href={`/create`}>
+                    <Button variant="contained" color="primary" component={Link} to={`/create`}>
                         Add contact
                     </Button>
                 </Grid>
