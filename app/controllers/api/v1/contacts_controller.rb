@@ -2,7 +2,7 @@ module Api
   module V1
     class ContactsController < ApplicationController
       def index
-        @contacts = Contact.all
+        @contacts = Contact.all.order('first_name ASC')
       end
 
       def show
