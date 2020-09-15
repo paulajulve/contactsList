@@ -24,4 +24,4 @@ Go to `localhost:3000` to see the app runing :)
 Gracefully shut down the project with `docker-compose down`.
 
 ## Run the tests
-You can run the tests from the console with `docker-compose run web rake test`
+You can run the tests from the console with `make test`
