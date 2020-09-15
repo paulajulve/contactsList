@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContactsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::ContactsControllerTest < ActionDispatch::IntegrationTest
   test "should get all contacts" do
     get api_v1_contacts_path
     assert_response :ok
@@ -21,7 +21,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create contact" do
     post api_v1_contacts_path,
-      params: { first_name: "Syen", last_name: "Orogene", email: "syen@fulcrum.com", phone: "654321987" }
+         params: { first_name: "Syen", last_name: "Orogene", email: "syen@fulcrum.com", phone: "654321987" }
     assert_response :ok
   end
 
