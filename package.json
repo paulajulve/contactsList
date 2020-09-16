@@ -15,6 +15,20 @@
     "react_ujs": "^2.6.1"
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
+    "jest": "^26.4.2",
     "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/javascript/test-setup.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/config/webpack/test.js"
+    ]
   }
 }

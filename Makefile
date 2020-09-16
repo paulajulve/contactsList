@@ -10,3 +10,4 @@ build:
 test:
 	docker-compose run web rake test
 	docker-compose run web bundle exec rspec
+	docker-compose run web npm test
