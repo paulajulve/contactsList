@@ -37,7 +37,7 @@ module Api
 
         return head :not_found unless @contact
 
-        if @contact.destroy
+        if DeleteContact.execute(@contact)
           head :no_content
         else
           head 422
