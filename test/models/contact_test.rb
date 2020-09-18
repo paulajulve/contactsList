@@ -29,6 +29,7 @@ class ContactTest < ActiveSupport::TestCase
     })
 
     assert_not essun.save
+    assert_equal({:error=>:taken, :value=>"orogene@fulcrum.com"}, essun.errors.details[:email][0])
   end
 
   test "cannot create empty contact" do
@@ -46,9 +47,10 @@ class ContactTest < ActiveSupport::TestCase
     })
 
     assert_not contact.save
+    assert_equal({:error=>:invalid, :value=>"orogenefulcrum.com"}, contact.errors.details[:email][0])
   end
 
-  test "cannot create contact with invalid pphone" do
+  test "cannot create contact with invalid phone" do
     contact = Contact.new({
        first_name: "Syen",
        last_name: "Orogene",
@@ -57,5 +59,6 @@ class ContactTest < ActiveSupport::TestCase
     })
 
     assert_not contact.save
+    assert_equal({:error=>:invalid, :value=>"654"}, contact.errors.details[:phone][0])
   end
 end
