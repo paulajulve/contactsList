@@ -25,7 +25,7 @@ module Api
 
         return head :not_found unless @contact
 
-        if @contact.update(contact_params)
+        if UpdateContact.execute(@contact, contact_params)
           head :no_content
         else
           head 422
